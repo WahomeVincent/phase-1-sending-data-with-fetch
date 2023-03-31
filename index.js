@@ -1,6 +1,6 @@
 // Add your code here
-
-function submitData (userName, userEmail) {
+/* 
+function submitData () {
 const bodyContent = {
     name : "Wahome Vincent",
     email : "moringa@yahoo.ac.ke"
@@ -14,8 +14,8 @@ const fetchObject = {
 }
 
     fetch('http://localhost:3000/users',fetchObject)
-    .then(res => res.json())
-    .then(object => console.log(bodyContent))
+    .then(response => response.json())
+    .then(object => console.log(object))
     .catch(error => {
         alert("There is an error")
         console.log("An error somewhere")
@@ -23,4 +23,32 @@ const fetchObject = {
 
 }
 
-submitData()
+submitData() */
+
+function submitData(name, email) {
+    const userData = {
+      name: name,
+      email: email
+    };
+    
+    const url = 'http://localhost:3000/users';
+  
+    return fetch(url, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json'
+      },
+      body: JSON.stringify(userData)
+    })
+    .then(response => response.json())
+    .then(data => {
+      console.log(data);
+      document.body.innerHTML = data.id;
+    })
+    .catch(error => {
+      console.log(error);
+      document.body.innerHTML = error.message;
+    });
+  }
+  
